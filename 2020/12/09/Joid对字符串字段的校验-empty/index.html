@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
     <title>Joid对字符串字段的校验-empty | Bet2019</title>
-    <meta name="description" content="后端用NodeJs开发，在router时候，我们可能会用到Jois组件帮助我们对get, patch等方法的params或者body进行校验。 12345router.route(&amp;#x27;&#x2F;abc&amp;#x27;)    .patch(hasPermissions(&amp;#x27;xxx&amp;#x27;), [        validateParams(Joi.object(&amp;#123;uuid: Jo">
+    <meta name="description" content="后端用NodeJs开发，在router时候，我们可能会用到 Joi 组件帮助我们对get, patch等方法的params或者body进行校验。 12345router.route(&amp;#x27;&#x2F;abc&amp;#x27;)    .patch(hasPermissions(&amp;#x27;xxx&amp;#x27;), [        validateParams(Joi.object(&amp;#123;uuid: J">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Joid对字符串字段的校验-empty">
 <meta property="og:url" content="http://example.com/2020/12/09/Joid%E5%AF%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%E7%9A%84%E6%A0%A1%E9%AA%8C-empty/index.html">
 <meta property="og:site_name" content="Bet2019">
-<meta property="og:description" content="后端用NodeJs开发，在router时候，我们可能会用到Jois组件帮助我们对get, patch等方法的params或者body进行校验。 12345router.route(&amp;#x27;&#x2F;abc&amp;#x27;)    .patch(hasPermissions(&amp;#x27;xxx&amp;#x27;), [        validateParams(Joi.object(&amp;#123;uuid: Jo">
+<meta property="og:description" content="后端用NodeJs开发，在router时候，我们可能会用到 Joi 组件帮助我们对get, patch等方法的params或者body进行校验。 12345router.route(&amp;#x27;&#x2F;abc&amp;#x27;)    .patch(hasPermissions(&amp;#x27;xxx&amp;#x27;), [        validateParams(Joi.object(&amp;#123;uuid: J">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-09T02:22:14.000Z">
-<meta property="article:modified_time" content="2020-12-09T02:53:43.291Z">
+<meta property="article:modified_time" content="2020-12-09T02:56:39.907Z">
 <meta property="article:author" content="Daniel Niu">
 <meta property="article:tag" content="Joi">
 <meta name="twitter:card" content="summary">
@@ -228,7 +228,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 305(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 311(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 1(分)</span>
@@ -238,7 +238,7 @@
             </p>
         </header>
         <div class="marked-body article-body">
-            <p>后端用NodeJs开发，在router时候，我们可能会用到Jois组件帮助我们对get, patch等方法的params或者body进行校验。</p>
+            <p>后端用NodeJs开发，在router时候，我们可能会用到 <a target="_blank" rel="noopener" href="https://joi.dev/">Joi</a> 组件帮助我们对get, patch等方法的params或者body进行校验。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router.route(<span class="string">&#x27;/abc&#x27;</span>)</span><br><span class="line">    .patch(hasPermissions(<span class="string">&#x27;xxx&#x27;</span>), [</span><br><span class="line">        validateParams(Joi.object(&#123;uuid: Joi.string().uuid().required()&#125;)),</span><br><span class="line">        validateBody(validationSchema.editData)</span><br><span class="line">    ], indexController.editAction)</span><br></pre></td></tr></table></figure>
 <h3 id="只能为字符串，但要注意empty">只能为字符串，但要注意empty</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> schema = Joi.object(&#123;</span><br><span class="line">  name : Joi.string().empty(<span class="string">&quot;&quot;</span>),</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">let</span>&#123;error, value&#125; = schema.validate(data);</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> data = &#123;name:<span class="string">&quot;&quot;</span>&#125;   /*通过校验*/ </span><br><span class="line"><span class="built_in">let</span> data = &#123;name:null&#125;   /*不通过校验, 提示name必须为string类型*/</span><br></pre></td></tr></table></figure>
@@ -248,7 +248,7 @@
 Considers anything that matches the schema to be empty (undefined).</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> schema = Joi.string().empty(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">schema.validate(<span class="string">&#x27;&#x27;</span>); // returns &#123; error: null, value: undefined &#125;</span><br><span class="line">schema = schema.empty();</span><br><span class="line">schema.validate(<span class="string">&#x27;&#x27;</span>); // returns &#123; error: <span class="string">&quot;value&quot;</span> is not allowed to be empty, value: <span class="string">&#x27;&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>如果用了name : Joi.string().empty(“”)，那么name不会传到editAction里面。也就是说’'的情况忽略。</p>
+<p>如果用了name : Joi.string().empty(“”)，那么name不会传到editAction里面。也就是说’'的情况被忽略。如下场景</p>
 <ol>
 <li>什么什么时候给了name变量值，如张三</li>
 <li>想在前端给name的输入框，删除张三，保存后，name的值传到后端是’’</li>

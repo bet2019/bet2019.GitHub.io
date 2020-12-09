@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>Fast RTPS on Windows | Bet2019</title>
+    <meta name="description" content="网上很多资料是Linux环境下的配置步骤，这篇文章是在Windows下安装配置编译链接生成可执行程序的。 关于Fast DDS，可以参考官网。 这里是参考了官网的Windows installation from sources  有三个package要安装 foonathan_memory_vendor, an STL compatible C++ memory allocator librar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fast RTPS on Windows">
+<meta property="og:url" content="http://example.com/2020/12/01/Fast-RTPS-on-Windows/index.html">
+<meta property="og:site_name" content="Bet2019">
+<meta property="og:description" content="网上很多资料是Linux环境下的配置步骤，这篇文章是在Windows下安装配置编译链接生成可执行程序的。 关于Fast DDS，可以参考官网。 这里是参考了官网的Windows installation from sources  有三个package要安装 foonathan_memory_vendor, an STL compatible C++ memory allocator librar">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2020/12/01/Fast-RTPS-on-Windows/install.JPG">
+<meta property="og:image" content="http://example.com/2020/12/01/Fast-RTPS-on-Windows/cxxfiles.JPG">
+<meta property="og:image" content="http://example.com/2020/12/01/Fast-RTPS-on-Windows/pubsub.JPG">
+<meta property="article:published_time" content="2020-12-01T12:20:28.000Z">
+<meta property="article:modified_time" content="2020-12-09T03:02:52.322Z">
+<meta property="article:author" content="Daniel Niu">
+<meta property="article:tag" content="ROS, Fast DDS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/01/Fast-RTPS-on-Windows/install.JPG">
+
+    
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/css/common.min.css">
+
+
+
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css" rel="stylesheet">
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/bet2019" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">bet2019</h2>
+            <h3 id="title" class="hidden xl:block"></h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                Shanghai, China
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<script id="search-teamplate" type="text/html" data-path="/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-categories" role="menuitem">
+                <a href="/categories">
+                    <i class="iconfont icon-folder" aria-hidden="true"></i>
+                    <span class="menu-title">分类</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-tags" role="menuitem">
+                <a href="/tags">
+                    <i class="iconfont icon-tag" aria-hidden="true"></i>
+                    <span class="menu-title">标签</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://github.com/bet2019">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://telegram.org/">
+                <i class="iconfont social-icon icon-telegram"></i>
+                <span class="menu-title hidden lg:inline">menu.telegram</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://twitter.com">
+                <i class="iconfont social-icon icon-twitter"></i>
+                <span class="menu-title hidden lg:inline">menu.twitter</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-12 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            Fast RTPS on Windows
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2020/12/01/Fast-RTPS-on-Windows/" class="article-date">
+	  <time datetime="2020-12-01T12:20:28.000Z" itemprop="datePublished">12月 1</time>
+	</a>
+</span>
+
+                
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/ROS/">ROS</a>
+  </span>
+
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-none-link" href="/tags/ROS-Fast-DDS/" rel="tag">ROS, Fast DDS</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/2020/12/01/Fast-RTPS-on-Windows/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 572(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 2(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p>网上很多资料是Linux环境下的配置步骤，这篇文章是在Windows下安装配置编译链接生成可执行程序的。<br>
+关于Fast DDS，可以参考<a target="_blank" rel="noopener" href="https://www.eprosima.com/">官网</a>。</p>
+<p>这里是参考了官网的<a target="_blank" rel="noopener" href="https://fast-dds.docs.eprosima.com/en/latest/installation/sources/sources_windows.html#">Windows installation from sources</a></p>
+<ul>
+<li>有三个package要安装<br>
+<strong>foonathan_memory_vendor</strong>, an STL compatible C++ memory allocator library. # 可以简单理解为申请内存的<br>
+<strong>fastcdr</strong>, a C++ library that serializes according to the standard CDR serialization mechanism. # 可以简单理解为序列化，反序列化的<br>
+<strong>fastrtps</strong>, the core library of eProsima Fast DDS library. # fast rtps的核心组件</li>
+<li>环境的预配<br>
+Visual Studio<br>
+Chocolatey<br>
+CMake<br>
+git<br>
+OpenSSL(配置环境变量，如OPENSSL_ROOT_DIR=C:\Program Files\OpenSSL-Win64)</li>
+<li>依赖<br>
+<a target="_blank" rel="noopener" href="https://github.com/ros2/choco-packages/releases/download/2020-02-24/asio.1.12.1.nupkg">Asio</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/ros2/choco-packages/releases/download/2020-02-24/tinyxml2.6.0.0.nupkg">TinyXML2</a><br>
+依赖下载后，直接到文件夹里用</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install -y -s &lt;PATH_TO_DOWNLOADS&gt; asio tinyxml2</span><br></pre></td></tr></table></figure>
+<h1>CMake安装方法</h1>
+<p>我这里用的CMake安装，对比Colcon installation方法，我觉得更能知道install做了什么。<br>
+clone下面的每个package的代码，并用cmake编译。<br>
+在比如D盘位置，新建Fast-DDS文件夹，或者其他你自定义的文件夹，然后进入该文件夹</p>
+<ul>
+<li>Foonathan memory</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> D:\Fast-DDS</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/eProsima/foonathan_memory_vendor.git</span><br><span class="line"><span class="built_in">cd</span> foonathan_memory_vendor</span><br><span class="line">mkdir build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake ..  -DBUILD_SHARED_LIBS=ON</span><br><span class="line">cmake --build . --target install</span><br></pre></td></tr></table></figure>
+<p><font color="orange">cmake build默认是debug的，如果想release，那么添加–config Release</font></p>
+<ul>
+<li>Fast CDR</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> D:\Fast-DDS</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/eProsima/Fast-CDR.git</span><br><span class="line"><span class="built_in">cd</span> Fast-CDR</span><br><span class="line">mkdir build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake ..</span><br><span class="line">cmake --build . --target install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Fast DDS</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> D:\Fast-DDS</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/eProsima/Fast-DDS.git</span><br><span class="line"><span class="built_in">cd</span> Fast-DDS</span><br><span class="line">mkdir build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake ..</span><br><span class="line">cmake --build . --target install</span><br></pre></td></tr></table></figure>
+<p>没问题后，在如下应该有。<br>
+<img src="/2020/12/01/Fast-RTPS-on-Windows/install.JPG" alt="install"></p>
+<h1>Fast DDS-Gen的安装(可选)</h1>
+<p>Fast DDS-Gen是从idl文件生成cxx文件的。</p>
+<h2 id="环境配置，安装后再配置环境变量">环境配置，安装后再配置环境变量</h2>
+<pre><code>Java JDK
+Gradle
+</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --recursive https://github.com/eProsima/Fast-DDS-Gen.git</span><br><span class="line"><span class="built_in">cd</span> Fast-DDS-Gen</span><br><span class="line">gradle assemble</span><br></pre></td></tr></table></figure>
+<h2 id="在Fast-DDS-Gen文件夹里会有">在Fast DDS-Gen文件夹里会有</h2>
+<ul>
+<li>share/fastddsgen, 有个.jar包</li>
+<li>scripts, 有bat脚本，用来生成cxx文件。为方便使用，可以添加这个文件夹到系统环境变量或者每次都要指定这个fastddsgen.bat。</li>
+</ul>
+<h2 id="用法">用法</h2>
+<ul>
+<li>新建个idl文件，如HelloWorld.idl</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// HelloWorld.idl</span><br><span class="line">struct HelloWorld</span><br><span class="line">&#123;</span><br><span class="line">    string message;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>转换</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\03-ROS\testFastRTPS&gt; .../fastddsgen.bat -example CMake HelloWorld.idl</span><br></pre></td></tr></table></figure>
+<p>会生成如下文件<br>
+<img src="/2020/12/01/Fast-RTPS-on-Windows/cxxfiles.JPG" alt="cxxfiles"></p>
+<ul>
+<li>编译<br>
+管理员权限打开’Developer Command Prompt for VS 2019’</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake ..</span><br><span class="line">cmake --build .</span><br></pre></td></tr></table></figure>
+<p>这样就会生成Debug文件夹里的HelloWorld.exe</p>
+<ul>
+<li>运行<br>
+打开2个CMD或者Powershell</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorld.exe publisher</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorld.exe subscriber</span><br></pre></td></tr></table></figure>
+<p>会有这样的消息<br>
+<img src="/2020/12/01/Fast-RTPS-on-Windows/pubsub.JPG" alt="pubsub"></p>
+
+        </div>
+        
+
+    </article>
+    
+    <section id="comments">
+        
+
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">CMake安装方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Fast DDS-Gen的安装(可选)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%8C%E5%AE%89%E8%A3%85%E5%90%8E%E5%86%8D%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">环境配置，安装后再配置环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8Fast-DDS-Gen%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E4%BC%9A%E6%9C%89"><span class="toc-number">2.2.</span> <span class="toc-text">在Fast DDS-Gen文件夹里会有</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text">用法</span></a></li></ol></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a target="_blank" rel="noopener" href="https://github.com/bet2019">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a target="_blank" rel="noopener" href="https://telegram.org/">
+                <i class="iconfont icon-telegram"></i>
+            </a>
+        
+            <a target="_blank" rel="noopener" href="https://twitter.com">
+                <i class="iconfont icon-twitter"></i>
+            </a>
+        
+            <a href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/js/dom-event.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/yox@1.0.0-alpha.121/dist/standard/prod/yox.min.js"></script>
+
+
+<script src="/js/search.min.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '8b1aea39eb56d3ac3894',
+        clientSecret: '1589b689a66e85b8ce0a17a49e755ddc0b6ed3a9',
+        repo: 'bet2019.GitHub.io',
+        owner: 'bet2019',
+        admin: ['bet2019'],
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    })
+    gitalk.render('comments')
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/js/light-gallery.min.js"></script>
+
+
+
+
+
+    </body>
+</html>
