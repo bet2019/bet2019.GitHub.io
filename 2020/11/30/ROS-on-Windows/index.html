@@ -3,12 +3,16 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-    <title>archive: 2020 | Bet2019</title>
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Bet2019">
-<meta property="og:url" content="http://example.com/archives/2020/index.html">
+    <title>ROS on Windows | Bet2019</title>
+    <meta name="description" content="Windows 10下安装ROS2  安装前提   ✔️ 64-bit (amd64) environment of Windows 10 Desktop. ✔️ Visual Studio 2019 with Desktop development with C++ workload included. ✔️ Chocolatey package manager installed. ✔️ Gi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROS on Windows">
+<meta property="og:url" content="http://example.com/2020/11/30/ROS-on-Windows/index.html">
 <meta property="og:site_name" content="Bet2019">
+<meta property="og:description" content="Windows 10下安装ROS2  安装前提   ✔️ 64-bit (amd64) environment of Windows 10 Desktop. ✔️ Visual Studio 2019 with Desktop development with C++ workload included. ✔️ Chocolatey package manager installed. ✔️ Gi">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-30T12:50:56.000Z">
+<meta property="article:modified_time" content="2020-12-07T01:35:29.554Z">
 <meta property="article:author" content="Daniel Niu">
 <meta name="twitter:card" content="summary">
 
@@ -20,6 +24,13 @@
 
 
 
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css" rel="stylesheet">
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
     
     
     
@@ -172,56 +183,100 @@
 </header>
 
         <section class="main-section">
-            <main class="flex-1 px-4 py-12 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+            
+    <main class="flex-1 px-4 py-12 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
     <article class="content article article-archives article-type-list" itemscope="">
         <header class="article-header">
-            <h1 itemprop="title">archive</h1>
-            <p class="text-gray-600">共 5 篇文章</p>
-        </header>
-        <div class="article-body">
             
     
-    <section class="year-archive">
-    <header>
-        <h1><a >2020</a></h1>
-    </header>
-    <div class="archive-content">
-        
-            <a href="/2020/12/09/Joid%E5%AF%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%E7%9A%84%E6%A0%A1%E9%AA%8C-empty/" class="post-item">
-                <div class="post-time">12-09</div>
-                <div class="post-title">Joid对字符串字段的校验-empty</div>
-            </a>
-        
-            <a href="/2020/11/30/ROS-on-Windows/" class="post-item">
-                <div class="post-time">11-30</div>
-                <div class="post-title">ROS on Windows</div>
-            </a>
-        
-            <a href="/2020/11/20/Azure%20IoT-%20MQTT%E7%9B%B4%E8%BF%9EIoTHub/" class="post-item">
-                <div class="post-time">11-20</div>
-                <div class="post-title">Azure IoT- MQTT直连IoT Hub</div>
-            </a>
-        
-            <a href="/2020/11/17/Azure%20DevOps%20-%20%E5%88%A0%E9%99%A4commit/" class="post-item">
-                <div class="post-time">11-17</div>
-                <div class="post-title">Azure DevOps - 删除commit</div>
-            </a>
-        
-            <a href="/2020/11/11/%E7%AC%AC%E4%B8%80%E4%B8%AABlog/" class="post-item">
-                <div class="post-time">11-11</div>
-                <div class="post-title">第一个Blog</div>
-            </a>
-        
-    </div>
-</section>
+        <h1 class="article-title text-lg" itemprop="name">
+            ROS on Windows
+        </h1>
+    
 
 
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2020/11/30/ROS-on-Windows/" class="article-date">
+	  <time datetime="2020-11-30T12:50:56.000Z" itemprop="datePublished">11月 30</time>
+	</a>
+</span>
+
+                
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/Azure-ROS/">Azure, ROS</a>
+  </span>
+
+
+                
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/2020/11/30/ROS-on-Windows/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 260(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 1(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <h1>Windows 10下安装ROS2</h1>
+<ul>
+<li>安装前提</li>
+</ul>
+<blockquote>
+<p>✔️ 64-bit (amd64) environment of Windows 10 Desktop.<br>
+✔️ Visual Studio 2019 with Desktop development with C++ workload included.<br>
+✔️ Chocolatey package manager installed.<br>
+✔️ Git source control software installed.</p>
+</blockquote>
+<ul>
+<li>安装开始<br>
+从开始菜单，找到Developer Command Prompt for VS 2019<br>
+用管理员权限打开这个CMD</li>
+</ul>
+<p>根据下面步骤安装ROS 2 Foxy版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir c:\opt\chocolatey <span class="comment">#ROS默认安装在c:\opt</span></span><br><span class="line"><span class="built_in">set</span> ChocolateyInstall=c:\opt\chocolatey</span><br><span class="line">choco <span class="built_in">source</span> add -n=ros-win -s=<span class="string">&quot;https://aka.ms/ros/public&quot;</span> --priority=1</span><br><span class="line">choco upgrade ros-foxy-desktop -y --execution-timeout=0</span><br></pre></td></tr></table></figure>
+<p>安装完ROS 2 ros-foxy-desktop，大概有5-6G大小。</p>
+<ul>
+<li>创建快捷方式</li>
+</ul>
+<ol>
+<li>SDF_PATH=c:\opt\ros\foxy\x64\share\sdformat\1.6<br>
+把这个变量添加到环境变量</li>
+<li>可以使用Windows Terminal，打开设置后，添加一下</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...,</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;commandline&quot;</span> : <span class="string">&quot;C:\\Windows\\System32\\cmd.exe /k \&quot;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\Tools\\VsDevCmd.bat\&quot; -arch=amd64 -host_arch=amd64 &amp;&amp; c:\\opt\\ros\\foxy\\x64\\setup.bat &amp;&amp; c:\\opt\\ros\\foxy\\x64\\share\\gazebo\\setup.bat&quot;</span>,</span><br><span class="line">    <span class="string">&quot;guid&quot;</span> : <span class="string">&quot;&#123;b453ae62-4e3d-5e58-b989-0a998ec441b0&#125;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;name&quot;</span> : <span class="string">&quot;ROS Noetic&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，你就在ROS2的开发命令行窗口中。</p>
 
         </div>
+        
+
     </article>
+    
+    <section id="comments">
+        
+
+        
+    </section>
+
+
     
 
 </main>
+
 <aside style="" id="sidebar" class="aside aside-fixture">
     <div class="widgets">
         
@@ -355,6 +410,9 @@
 </aside>
 
 
+
+
+
         </section>
         <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
     
@@ -390,6 +448,22 @@
 
 
 <script src="/js/search.min.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '8b1aea39eb56d3ac3894',
+        clientSecret: '1589b689a66e85b8ce0a17a49e755ddc0b6ed3a9',
+        repo: 'bet2019.GitHub.io',
+        owner: 'bet2019',
+        admin: ['bet2019'],
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    })
+    gitalk.render('comments')
+</script>
 
 
 
