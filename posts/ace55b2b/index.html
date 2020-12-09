@@ -3,21 +3,19 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-    <title>Azure DevOps - 删除commit | Bet2019</title>
-    <meta name="description" content="TortoiseGit删除最后commit之前的连续commit 在最后提交commit之前， 可能有很小的改动，如typo，删除console.log等。那么可以把这些小改动放到最后的commit，删除之前的commit。 TortoiseGit打开commit log 在要删除的那些commit的前一个commit上，右键后，选择reset xxx to this 然后，右键这个commit">
+    <title>Joi对字符串字段的校验-empty | Bet2019</title>
+    <meta name="description" content="后端用NodeJs开发，在router时候，我们可能会用到 Joi 组件帮助我们对get, patch等方法的params或者body进行校验。 12345router.route(&amp;#x27;&#x2F;abc&amp;#x27;)    .patch(hasPermissions(&amp;#x27;xxx&amp;#x27;), [        validateParams(Joi.object(&amp;#123;uuid: J">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Azure DevOps - 删除commit">
-<meta property="og:url" content="https://bet2019.github.io/article/d621b24e.html">
+<meta property="og:title" content="Joi对字符串字段的校验-empty">
+<meta property="og:url" content="https://bet2019.github.io/posts/ace55b2b/index.html">
 <meta property="og:site_name" content="Bet2019">
-<meta property="og:description" content="TortoiseGit删除最后commit之前的连续commit 在最后提交commit之前， 可能有很小的改动，如typo，删除console.log等。那么可以把这些小改动放到最后的commit，删除之前的commit。 TortoiseGit打开commit log 在要删除的那些commit的前一个commit上，右键后，选择reset xxx to this 然后，右键这个commit">
+<meta property="og:description" content="后端用NodeJs开发，在router时候，我们可能会用到 Joi 组件帮助我们对get, patch等方法的params或者body进行校验。 12345router.route(&amp;#x27;&#x2F;abc&amp;#x27;)    .patch(hasPermissions(&amp;#x27;xxx&amp;#x27;), [        validateParams(Joi.object(&amp;#123;uuid: J">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bet2019.github.io/article/d621b24e.htm/ForcePush.JPG">
-<meta property="article:published_time" content="2020-11-17T05:35:38.000Z">
-<meta property="article:modified_time" content="2020-12-09T06:41:05.806Z">
+<meta property="article:published_time" content="2020-12-09T02:22:14.000Z">
+<meta property="article:modified_time" content="2020-12-09T06:41:05.815Z">
 <meta property="article:author" content="Daniel Niu">
-<meta property="article:tag" content="Azure, DevOps">
+<meta property="article:tag" content="Joi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bet2019.github.io/article/d621b24e.htm/ForcePush.JPG">
 
     
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -195,7 +193,7 @@
             
     
         <h1 class="article-title text-lg" itemprop="name">
-            Azure DevOps - 删除commit
+            Joi对字符串字段的校验-empty
         </h1>
     
 
@@ -204,33 +202,33 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     <i class="iconfont icon-calendar-check"></i>
-	<a href="/article/d621b24e.html" class="article-date">
-	  <time datetime="2020-11-17T05:35:38.000Z" itemprop="datePublished">11月 17</time>
+	<a href="/posts/ace55b2b/" class="article-date">
+	  <time datetime="2020-12-09T02:22:14.000Z" itemprop="datePublished">12月 9</time>
 	</a>
 </span>
 
                 
     <span class="article-category">
     <i class="iconfont icon-folder"></i>
-    <a class="article-category-link" href="/categories/Azure/">Azure</a>
+    <a class="article-category-link" href="/categories/NodeJs-Joi/">NodeJs, Joi</a>
   </span>
 
 
                 
     <span class="article-tags">
     <i class="iconfont icon-tag"></i>
-    <a class="article-tag-none-link" href="/tags/Azure-DevOps/" rel="tag">Azure, DevOps</a>
+    <a class="article-tag-none-link" href="/tags/Joi/" rel="tag">Joi</a>
   </span>
 
 
                 <span class="_partial/post-comment"><i class="icon icon-comment"></i>
-                    <a href="/article/d621b24e.html#comments" class="article-comment-link">
+                    <a href="/posts/ace55b2b/#comments" class="article-comment-link">
                         评论
                     </a>
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 183(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 311(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 1(分)</span>
@@ -240,21 +238,24 @@
             </p>
         </header>
         <div class="marked-body article-body">
-            <ul>
-<li>TortoiseGit删除最后commit之前的连续commit<br>
-在最后提交commit之前， 可能有很小的改动，如typo，删除console.log等。那么可以把这些小改动放到最后的commit，删除之前的commit。<br>
-TortoiseGit打开commit log<br>
-在要删除的那些commit的前一个commit上，右键后，选择reset xxx to this<br>
-然后，右键这个commit id后，选择push<br>
-使用git的话，2个命令搞定：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard abc526ef839882b6d631c0c59296a2d6d43dae34 <span class="comment">#想要恢复到的版本commit id</span></span><br><span class="line">git push origin HEAD --force</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在Azure Devops的Repo环境上使用<br>
-在Azure DeveOps环境上，可能会出现请使用ForcePush类似错误提示。那么确认在Project Settings-&gt;Repos-&gt;Repositories-&gt;你所在的group-&gt;Force push，对这个选项，选择Allow，如下图<br>
-<img src="/article/d621b24e.htm/ForcePush.JPG" alt="ForcePush"></li>
-</ul>
-
+            <p>后端用NodeJs开发，在router时候，我们可能会用到 <a target="_blank" rel="noopener" href="https://joi.dev/">Joi</a> 组件帮助我们对get, patch等方法的params或者body进行校验。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router.route(<span class="string">&#x27;/abc&#x27;</span>)</span><br><span class="line">    .patch(hasPermissions(<span class="string">&#x27;xxx&#x27;</span>), [</span><br><span class="line">        validateParams(Joi.object(&#123;uuid: Joi.string().uuid().required()&#125;)),</span><br><span class="line">        validateBody(validationSchema.editData)</span><br><span class="line">    ], indexController.editAction)</span><br></pre></td></tr></table></figure>
+<h3 id="只能为字符串，但要注意empty">只能为字符串，但要注意empty</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> schema = Joi.object(&#123;</span><br><span class="line">  name : Joi.string().empty(<span class="string">&quot;&quot;</span>),</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">let</span>&#123;error, value&#125; = schema.validate(data);</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> data = &#123;name:<span class="string">&quot;&quot;</span>&#125;   /*通过校验*/ </span><br><span class="line"><span class="built_in">let</span> data = &#123;name:null&#125;   /*不通过校验, 提示name必须为string类型*/</span><br></pre></td></tr></table></figure>
+<p>这里着重说明下<strong>empty</strong>用法，API 17.3.0如下</p>
+<blockquote>
+<p>any.empty(schema)<br>
+Considers anything that matches the schema to be empty (undefined).</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> schema = Joi.string().empty(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">schema.validate(<span class="string">&#x27;&#x27;</span>); // returns &#123; error: null, value: undefined &#125;</span><br><span class="line">schema = schema.empty();</span><br><span class="line">schema.validate(<span class="string">&#x27;&#x27;</span>); // returns &#123; error: <span class="string">&quot;value&quot;</span> is not allowed to be empty, value: <span class="string">&#x27;&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>如果用了name : Joi.string().empty(“”)，那么name不会传到editAction里面。也就是说’'的情况被忽略。如下场景</p>
+<ol>
+<li>什么什么时候给了name变量值，如张三</li>
+<li>想在前端给name的输入框，删除张三，保存后，name的值传到后端是’’</li>
+<li>然而，在Joi校验时候，name=''传不到controller的action方法，也就不能保存空字串了。</li>
+</ol>
+<h3 id="允许空字符串和null">允许空字符串和null</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> schema = Joi.object(&#123;</span><br><span class="line">  name : Joi.string().allow(...[null, <span class="string">&quot;&quot;</span>]),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
         </div>
         
 
@@ -276,7 +277,7 @@ TortoiseGit打开commit log<br>
     <div class="toc-sidebar">
         <nav id="toc" class="article-toc">
             <h3 class="toc-title">文章目录</h3>
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E8%83%BD%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E4%BD%86%E8%A6%81%E6%B3%A8%E6%84%8Fempty"><span class="toc-number">1.</span> <span class="toc-text">只能为字符串，但要注意empty</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%81%E8%AE%B8%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8Cnull"><span class="toc-number">2.</span> <span class="toc-text">允许空字符串和null</span></a></li></ol>
         </nav>
     </div>
 </aside>
